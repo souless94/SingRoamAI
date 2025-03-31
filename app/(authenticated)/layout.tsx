@@ -6,7 +6,7 @@ import { SessionAuth } from "supertokens-auth-react/recipe/session";
 export default function AuthenticatedLayout({
   children,
 }: {
-  children: ReactNode;
+  children: Readonly<ReactNode>;
 }) {
   return <SessionAuth>{children}</SessionAuth>;
 }

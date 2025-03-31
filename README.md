@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SingRoamAI
 
-## Getting Started
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/4bd60097b63e4451a251141f8c1e7feb)](https://app.codacy.com/gh/souless94/SingRoamAI/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=souless94_SingRoamAI&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=souless94_SingRoamAI)
+[![Snyk Badge](https://snyk.io/test/github/souless94/SingRoamAI/badge.svg)](https://snyk.io/test/github/souless94/SingRoamAI)
 
-First, run the development server:
+SingRoamAI is a personalized AI-powered travel itinerary planner designed for Singaporeans. It helps users easily plan free and easy trips while recording past travel experiences. The platform focuses on AI-generated itineraries, seamless itinerary management, and an intuitive user experience.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
+- **AI-Generated Itineraries**: Get smart, structured travel plans based on your specified locations and activities.
+- **Easy Trip Planning & Recording**: Designed for free and easy travelers to document and plan trips effortlessly.
+- **CRUD Operations for Itineraries**: Create, update, and manage your travel itineraries with ease.
+- **Weather & Seasonal Insights**: Displays weather forecasts with winter wear recommendations if applicable.
+- **Estimated Cost Calculation**: Provides estimated expenses based on selected activities and budget.
+- **Cultural & Safety Tips**: Offers useful travel advice without overwhelming users.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Supported Destinations (Phase 1)
+- Hong Kong
+- Taiwan
+- Malaysia
+- Japan
+- Korea
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
+- **Frontend**: Next.js
+- **Deployment**: Vercel
+- **Authentication**: SuperTokens
+- **UI Framework**: shadcn/ui
+- **Data Handling**: Markdown for structured itineraries
+- **Security**:
+  - Permissions control for itinerary editing
+  - Antivirus scanning for past itinerary uploads
+  - XSS Protection & CSP Implementation (Future Enhancements)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Milestones
+### **Milestone 1: Core Features**
+- [x] Login Page & Authentication (SuperTokens)
+- [x] Dashboard Page
+- [ ] CRUD Operations for Itineraries
+- [ ] Unit Tests for CRUD Operations for Itineraries
 
-## Learn More
+### **Milestone 2**
+- [ ] Implement AI Itinerary Generation (GenAI)
+- [ ] User Permissions (Only Edit Own Itinerary)
+- [ ] AI Output Validation Tests
+- [ ] User Permission Tests
 
-To learn more about Next.js, take a look at the following resources:
+### **Milestone 3: Security & File Handling**
+- [ ] File Upload & Antivirus Integration
+- [ ] Security Hardening (XSS, CSP, etc.)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### **Milestone 4: Release**
+- [ ] CI/CD Implementation
+- [ ] Security Tests
+- [ ] Vercel Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## CI/CD & Security
+- **CI/CD Pipeline**: Automating testing and deployment
+- **Code Quality & Security Tools**:
+  - Codacy
+  - Sonar
+  - Snyk
 
-## Deploy on Vercel
+## Installation & Running Locally
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/yourusername/singroamai.git
+   ```
+2. Navigate to the project folder:
+   ```sh
+   cd singroamai
+   ```
+3. Install dependencies:
+   ```sh
+   yarn install
+   ```
+4. Start the development server:
+   ```sh
+   yarn dev
+   ```
+5. Open `http://localhost:3000` in your browser.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contributing
+Contributions are welcome! Please check the [issues](https://github.com/yourusername/singroamai/issues) section and follow the contribution guidelines.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+This project is licensed under the MIT License.
+
+---
+For any inquiries or support, please contact [your email or project link].
+
