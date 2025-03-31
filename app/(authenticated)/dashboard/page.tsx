@@ -1,8 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { useSessionContext } from "supertokens-auth-react/recipe/session";
-import { signOut } from "supertokens-auth-react/recipe/session";
+import { useSessionContext, signOut } from "supertokens-auth-react/recipe/session";
 
 function NavBar() {
 

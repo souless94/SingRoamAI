@@ -8,7 +8,7 @@ interface FeatureCardProps {
     description: string;
 }
 
-export function FeatureCard({ icon, title, description }: FeatureCardProps) {
+export function FeatureCard({ icon, title, description }: Readonly<FeatureCardProps>) {
     return (
       <Card className="flex flex-col items-center text-center p-6 rounded-lg border border-primary/10 bg-background shadow-sm hover:shadow-md transition-all duration-300 transform hover:scale-105 hover:translate-y-[-5px] relative z-10">
         <CardHeader className="flex justify-center items-center">
