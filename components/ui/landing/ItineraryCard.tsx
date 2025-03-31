@@ -21,10 +21,9 @@ export function ItineraryCard({
         <Image
           src={ image ||  "/images/placeholder.png"}
           alt={title}
-          layout="responsive"
-          height={200}
-          width={200}
-          className="object-cover transition-transform duration-500 max-h-64"
+          height={500}
+          width={500}
+          className="object-cover transition-transform duration-500 max-h-64 w-full"
         />
         {badge && (
           <div className="absolute top-3 right-3 bg-accent/90 text-white px-3 py-1 rounded-full text-xs font-medium rotate-2">
