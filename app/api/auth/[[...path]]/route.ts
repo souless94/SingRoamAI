@@ -19,21 +19,21 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {  
-  return handleCall(request);
+  return await handleCall(request);
 }
 
 export async function DELETE(request: NextRequest) {
-  return handleCall(request);
+  return await handleCall(request);
 }
 
 export async function PUT(request: NextRequest) {
-  return handleCall(request);
+  return await handleCall(request);
 }
 
 export async function PATCH(request: NextRequest) {
-  return handleCall(request);
+  return await handleCall(request);
 }
 
 export async function HEAD(request: NextRequest) {
-  return handleCall(request);
+  return await handleCall(request);
 }

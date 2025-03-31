@@ -22,7 +22,7 @@ export async function middleware(
     return NextResponse.next()
   }
 
-  return withSession(request, async (err, session) => {
+  return await withSession(request, async (err, session) => {
     if (err) {
       return NextResponse.json(err, { status: 500 });
     }

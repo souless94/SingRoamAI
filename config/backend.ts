@@ -41,7 +41,6 @@ export const backendConfig = (): TypeInput => {
                   // email is not in allow list, so we disallow
                   throw new Error("Not authorised user");
                 }
-
                 // We allow the sign in / up operation
                 return originalImplementation.signInUp(input);
               },

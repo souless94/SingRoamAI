@@ -31,7 +31,7 @@ export async function isEmailAllowed(email: string) {
   const updatedData = await UserMetadata.getUserMetadata("emailAllowList");
   const allowList: string[] = updatedData.metadata.emails || [];
 
-  logger.info(`allowList is ${allowList}` )
+  logger.info(`allowList is ${allowList.toString()}` )
 
   return allowList.includes(email);
 }
