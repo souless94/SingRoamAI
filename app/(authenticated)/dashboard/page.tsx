@@ -14,7 +14,7 @@ function NavBar() {
   return (
     <ul>
       <li>Home</li>
-      <li onClick={() => onLogout()}>Logout</li>
+      <li onClick={() => void onLogout()}>Logout</li>
     </ul>
   );
 }
