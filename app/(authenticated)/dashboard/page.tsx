@@ -1,4 +1,5 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
 import { signOut } from "supertokens-auth-react/recipe/session";
@@ -14,7 +15,7 @@ function NavBar() {
   return (
     <ul>
       <li>Home</li>
-      <li onClick={() => void onLogout()}>Logout</li>
+      <Button variant="outline" onClick={() => void onLogout()}>Logout</Button>
     </ul>
   );
 }
