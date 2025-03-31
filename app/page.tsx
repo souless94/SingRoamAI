@@ -403,15 +403,15 @@ export default function LandingPage() {
                 <div className="mt-12 flex flex-wrap justify-center gap-4">
                   <div className="flex items-center gap-2 px-4 py-2 bg-background rounded-full shadow-sm">
                     <div className="w-2 h-2 rounded-full bg-primary"></div>
-                    <span className="text-sm">10,000+ Itineraries Created</span>
+                    <span className="text-sm">Itineraries</span>
                   </div>
                   <div className="flex items-center gap-2 px-4 py-2 bg-background rounded-full shadow-sm">
-                    <div className="w-2 h-2 rounded-full bg-blue-400"></div>
-                    <span className="text-sm">500+ Destinations</span>
+                    <div className="w-2 h-2 rounded-full bg-accent"></div>
+                    <span className="text-sm">Destinations</span>
                   </div>
                   <div className="flex items-center gap-2 px-4 py-2 bg-background rounded-full shadow-sm">
                     <div className="w-2 h-2 rounded-full bg-secondary"></div>
-                    <span className="text-sm">4.9/5 User Rating</span>
+                    <span className="text-sm">User Ratings</span>
                   </div>
                 </div>
               </div>
