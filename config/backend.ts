@@ -5,7 +5,7 @@ import SessionNode from "supertokens-node/recipe/session";
 import UserMetadata from "supertokens-node/recipe/usermetadata";
 import { appInfo } from "./appInfo";
 import { TypeInput } from "supertokens-node/types";
-import { isEmailAllowed } from "@/lib/utils";
+import { isEmailAllowed } from "@/lib/appPermissions";
 
 export const backendConfig = (): TypeInput => {
   return {
