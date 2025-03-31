@@ -47,14 +47,6 @@ export const frontendConfig = (): SuperTokensConfig => {
       }),
       SessionReact.init(),
     ],
-    windowHandler: (original) => ({
-      ...original,
-      location: {
-        ...original.location,
-        getPathName: () => routerInfo.pathName!,
-        assign: (url) => routerInfo.router!.push(url.toString()),
-        setHref: (url) => routerInfo.router!.push(url.toString()),
-      },
-    }),
-  };
+  }
+   
 };

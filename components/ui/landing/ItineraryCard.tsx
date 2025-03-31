@@ -14,7 +14,7 @@ export function ItineraryCard({
   author,
   likes,
   badge,
-}: ItineraryCardProps) {
+}: Readonly<ItineraryCardProps>) {
   return (
     <div className="rounded-lg border border-primary/10 bg-background shadow-sm overflow-hidden hover:shadow-md transition-all duration-300 transform hover:scale-105 group">
       <div className="relative">

@@ -1,17 +1,20 @@
 "use client";
-
-import { useSessionContext } from "supertokens-auth-react/recipe/session";
-import { signOut } from "supertokens-auth-react/recipe/session";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { useSessionContext, signOut } from "supertokens-auth-react/recipe/session";
 
 function NavBar() {
+
+  const router = useRouter();
+
   async function onLogout() {
     await signOut();
-    window.location.href = "/auth"; // or redirect to wherever the login page is
+    router.push("/auth"); // or redirect to wherever the login page is
   }
   return (
     <ul>
       <li>Home</li>
-      <li onClick={onLogout}>Logout</li>
+      <Button variant="outline" onClick={() => void onLogout()}>Logout</Button>
     </ul>
   );
 }
