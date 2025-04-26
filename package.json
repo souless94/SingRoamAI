@@ -21,7 +21,7 @@
     "supertokens-auth-react": "^0.49.1",
     "supertokens-node": "^22.0.1",
     "supertokens-web-js": "^0.15.0",
-    "tailwind-merge": "^3.0.2",
+    "tailwind-merge": "^3.1.0",
     "tw-animate-css": "^1.2.5",
     "zod": "^3.24.2"
   },
