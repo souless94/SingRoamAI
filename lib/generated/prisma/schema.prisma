@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model appUser {
+  id        String   @id
+  email     String   @unique @db.VarChar(255)
+  imageUrl  String
+  CreatedAt DateTime @default(now())
+  UpdatedAt DateTime @default(now())
+}
+
+model Trip {
+  id        String    @id @default(cuid())
+  title     String
+  location  String
+  imageUrl  String?
+  budget    Int       @default(0)
+  startDate DateTime
+  endDate   DateTime
+  daysCount Int       @default(0)
+  days      TripDay[]
+  createdAt DateTime  @default(now())
+
+  weatherInfo   WeatherInfo @relation(fields: [weatherInfoid], references: [id])
+  weatherInfoid String      @unique
+}
+
+model TripDay {
+  id             String   @id @default(cuid())
+  title          String
+  trip           Trip     @relation(fields: [tripId], references: [id])
+  tripId         String
+  dayIndex       Int
+  date           DateTime
+  morning        String?
+  morningTitle   String?
+  afternoon      String?
+  afternoonTitle String?
+  evening        String?
+  eveningTitle   String?
+}
+
+model WeatherInfo {
+  id              String  @id @default(cuid())
+  season          String
+  temperatureInfo String
+  description     String
+  itemsToPack     String?
+  considerations  String?
+  Trip            Trip?
+}

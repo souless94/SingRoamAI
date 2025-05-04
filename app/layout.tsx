@@ -1,25 +1,27 @@
-import './globals.css'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import "./globals.css";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import { SuperTokensProvider } from "../components/supertokensProvider";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'SingRoamAI',
-  description: 'AI-Powered Travel Planning',
-}
+  title: "SingRoamAI",
+  description: "AI-Powered Travel Planning",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: Readonly<React.ReactNode>
+  children: Readonly<React.ReactNode>;
 }) {
   return (
     <html lang="en">
       <SuperTokensProvider>
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          {children}
+        </body>
       </SuperTokensProvider>
     </html>
-  )
+  );
 }
