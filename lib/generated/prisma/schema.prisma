@@ -36,6 +36,8 @@ model Trip {
 
   weatherInfo   WeatherInfo @relation(fields: [weatherInfoid], references: [id])
   weatherInfoid String      @unique
+
+  isDraft Boolean @default(true)
 }
 
 model TripDay {

@@ -256,8 +256,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.6.0
-   * Query Engine version: f676762280b54cd07c770017ed3711ddde35f37a
+   * Prisma Client JS version: 6.7.0
+   * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
    */
   export type PrismaVersion = {
     client: string
@@ -2200,6 +2200,7 @@ export namespace Prisma {
     daysCount: number | null
     createdAt: Date | null
     weatherInfoid: string | null
+    isDraft: boolean | null
   }
 
   export type TripMaxAggregateOutputType = {
@@ -2213,6 +2214,7 @@ export namespace Prisma {
     daysCount: number | null
     createdAt: Date | null
     weatherInfoid: string | null
+    isDraft: boolean | null
   }
 
   export type TripCountAggregateOutputType = {
@@ -2226,6 +2228,7 @@ export namespace Prisma {
     daysCount: number
     createdAt: number
     weatherInfoid: number
+    isDraft: number
     _all: number
   }
 
@@ -2251,6 +2254,7 @@ export namespace Prisma {
     daysCount?: true
     createdAt?: true
     weatherInfoid?: true
+    isDraft?: true
   }
 
   export type TripMaxAggregateInputType = {
@@ -2264,6 +2268,7 @@ export namespace Prisma {
     daysCount?: true
     createdAt?: true
     weatherInfoid?: true
+    isDraft?: true
   }
 
   export type TripCountAggregateInputType = {
@@ -2277,6 +2282,7 @@ export namespace Prisma {
     daysCount?: true
     createdAt?: true
     weatherInfoid?: true
+    isDraft?: true
     _all?: true
   }
 
@@ -2377,6 +2383,7 @@ export namespace Prisma {
     daysCount: number
     createdAt: Date
     weatherInfoid: string
+    isDraft: boolean
     _count: TripCountAggregateOutputType | null
     _avg: TripAvgAggregateOutputType | null
     _sum: TripSumAggregateOutputType | null
@@ -2409,6 +2416,7 @@ export namespace Prisma {
     daysCount?: boolean
     createdAt?: boolean
     weatherInfoid?: boolean
+    isDraft?: boolean
     days?: boolean | Trip$daysArgs<ExtArgs>
     weatherInfo?: boolean | WeatherInfoDefaultArgs<ExtArgs>
     _count?: boolean | TripCountOutputTypeDefaultArgs<ExtArgs>
@@ -2425,6 +2433,7 @@ export namespace Prisma {
     daysCount?: boolean
     createdAt?: boolean
     weatherInfoid?: boolean
+    isDraft?: boolean
     weatherInfo?: boolean | WeatherInfoDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["trip"]>
 
@@ -2439,6 +2448,7 @@ export namespace Prisma {
     daysCount?: boolean
     createdAt?: boolean
     weatherInfoid?: boolean
+    isDraft?: boolean
     weatherInfo?: boolean | WeatherInfoDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["trip"]>
 
@@ -2453,9 +2463,10 @@ export namespace Prisma {
     daysCount?: boolean
     createdAt?: boolean
     weatherInfoid?: boolean
+    isDraft?: boolean
   }
 
-  export type TripOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "location" | "imageUrl" | "budget" | "startDate" | "endDate" | "daysCount" | "createdAt" | "weatherInfoid", ExtArgs["result"]["trip"]>
+  export type TripOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "location" | "imageUrl" | "budget" | "startDate" | "endDate" | "daysCount" | "createdAt" | "weatherInfoid" | "isDraft", ExtArgs["result"]["trip"]>
   export type TripInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     days?: boolean | Trip$daysArgs<ExtArgs>
     weatherInfo?: boolean | WeatherInfoDefaultArgs<ExtArgs>
@@ -2485,6 +2496,7 @@ export namespace Prisma {
       daysCount: number
       createdAt: Date
       weatherInfoid: string
+      isDraft: boolean
     }, ExtArgs["result"]["trip"]>
     composites: {}
   }
@@ -2920,6 +2932,7 @@ export namespace Prisma {
     readonly daysCount: FieldRef<"Trip", 'Int'>
     readonly createdAt: FieldRef<"Trip", 'DateTime'>
     readonly weatherInfoid: FieldRef<"Trip", 'String'>
+    readonly isDraft: FieldRef<"Trip", 'Boolean'>
   }
     
 
@@ -5639,7 +5652,8 @@ export namespace Prisma {
     endDate: 'endDate',
     daysCount: 'daysCount',
     createdAt: 'createdAt',
-    weatherInfoid: 'weatherInfoid'
+    weatherInfoid: 'weatherInfoid',
+    isDraft: 'isDraft'
   };
 
   export type TripScalarFieldEnum = (typeof TripScalarFieldEnum)[keyof typeof TripScalarFieldEnum]
@@ -5746,6 +5760,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -5828,6 +5849,7 @@ export namespace Prisma {
     daysCount?: IntFilter<"Trip"> | number
     createdAt?: DateTimeFilter<"Trip"> | Date | string
     weatherInfoid?: StringFilter<"Trip"> | string
+    isDraft?: BoolFilter<"Trip"> | boolean
     days?: TripDayListRelationFilter
     weatherInfo?: XOR<WeatherInfoScalarRelationFilter, WeatherInfoWhereInput>
   }
@@ -5843,6 +5865,7 @@ export namespace Prisma {
     daysCount?: SortOrder
     createdAt?: SortOrder
     weatherInfoid?: SortOrder
+    isDraft?: SortOrder
     days?: TripDayOrderByRelationAggregateInput
     weatherInfo?: WeatherInfoOrderByWithRelationInput
   }
@@ -5861,6 +5884,7 @@ export namespace Prisma {
     endDate?: DateTimeFilter<"Trip"> | Date | string
     daysCount?: IntFilter<"Trip"> | number
     createdAt?: DateTimeFilter<"Trip"> | Date | string
+    isDraft?: BoolFilter<"Trip"> | boolean
     days?: TripDayListRelationFilter
     weatherInfo?: XOR<WeatherInfoScalarRelationFilter, WeatherInfoWhereInput>
   }, "id" | "weatherInfoid">
@@ -5876,6 +5900,7 @@ export namespace Prisma {
     daysCount?: SortOrder
     createdAt?: SortOrder
     weatherInfoid?: SortOrder
+    isDraft?: SortOrder
     _count?: TripCountOrderByAggregateInput
     _avg?: TripAvgOrderByAggregateInput
     _max?: TripMaxOrderByAggregateInput
@@ -5897,6 +5922,7 @@ export namespace Prisma {
     daysCount?: IntWithAggregatesFilter<"Trip"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Trip"> | Date | string
     weatherInfoid?: StringWithAggregatesFilter<"Trip"> | string
+    isDraft?: BoolWithAggregatesFilter<"Trip"> | boolean
   }
 
   export type TripDayWhereInput = {
@@ -6112,6 +6138,7 @@ export namespace Prisma {
     endDate: Date | string
     daysCount?: number
     createdAt?: Date | string
+    isDraft?: boolean
     days?: TripDayCreateNestedManyWithoutTripInput
     weatherInfo: WeatherInfoCreateNestedOneWithoutTripInput
   }
@@ -6127,6 +6154,7 @@ export namespace Prisma {
     daysCount?: number
     createdAt?: Date | string
     weatherInfoid: string
+    isDraft?: boolean
     days?: TripDayUncheckedCreateNestedManyWithoutTripInput
   }
 
@@ -6140,6 +6168,7 @@ export namespace Prisma {
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     daysCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDraft?: BoolFieldUpdateOperationsInput | boolean
     days?: TripDayUpdateManyWithoutTripNestedInput
     weatherInfo?: WeatherInfoUpdateOneRequiredWithoutTripNestedInput
   }
@@ -6155,6 +6184,7 @@ export namespace Prisma {
     daysCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     weatherInfoid?: StringFieldUpdateOperationsInput | string
+    isDraft?: BoolFieldUpdateOperationsInput | boolean
     days?: TripDayUncheckedUpdateManyWithoutTripNestedInput
   }
 
@@ -6169,6 +6199,7 @@ export namespace Prisma {
     daysCount?: number
     createdAt?: Date | string
     weatherInfoid: string
+    isDraft?: boolean
   }
 
   export type TripUpdateManyMutationInput = {
@@ -6181,6 +6212,7 @@ export namespace Prisma {
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     daysCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDraft?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type TripUncheckedUpdateManyInput = {
@@ -6194,6 +6226,7 @@ export namespace Prisma {
     daysCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     weatherInfoid?: StringFieldUpdateOperationsInput | string
+    isDraft?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type TripDayCreateInput = {
@@ -6468,6 +6501,11 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type TripDayListRelationFilter = {
     every?: TripDayWhereInput
     some?: TripDayWhereInput
@@ -6499,6 +6537,7 @@ export namespace Prisma {
     daysCount?: SortOrder
     createdAt?: SortOrder
     weatherInfoid?: SortOrder
+    isDraft?: SortOrder
   }
 
   export type TripAvgOrderByAggregateInput = {
@@ -6517,6 +6556,7 @@ export namespace Prisma {
     daysCount?: SortOrder
     createdAt?: SortOrder
     weatherInfoid?: SortOrder
+    isDraft?: SortOrder
   }
 
   export type TripMinOrderByAggregateInput = {
@@ -6530,6 +6570,7 @@ export namespace Prisma {
     daysCount?: SortOrder
     createdAt?: SortOrder
     weatherInfoid?: SortOrder
+    isDraft?: SortOrder
   }
 
   export type TripSumOrderByAggregateInput = {
@@ -6569,6 +6610,14 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type TripScalarRelationFilter = {
@@ -6696,6 +6745,10 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type TripDayUpdateManyWithoutTripNestedInput = {
@@ -6861,6 +6914,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -6914,6 +6972,14 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type TripDayCreateWithoutTripInput = {
@@ -7047,6 +7113,7 @@ export namespace Prisma {
     endDate: Date | string
     daysCount?: number
     createdAt?: Date | string
+    isDraft?: boolean
     weatherInfo: WeatherInfoCreateNestedOneWithoutTripInput
   }
 
@@ -7061,6 +7128,7 @@ export namespace Prisma {
     daysCount?: number
     createdAt?: Date | string
     weatherInfoid: string
+    isDraft?: boolean
   }
 
   export type TripCreateOrConnectWithoutDaysInput = {
@@ -7089,6 +7157,7 @@ export namespace Prisma {
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     daysCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDraft?: BoolFieldUpdateOperationsInput | boolean
     weatherInfo?: WeatherInfoUpdateOneRequiredWithoutTripNestedInput
   }
 
@@ -7103,6 +7172,7 @@ export namespace Prisma {
     daysCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     weatherInfoid?: StringFieldUpdateOperationsInput | string
+    isDraft?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type TripCreateWithoutWeatherInfoInput = {
@@ -7115,6 +7185,7 @@ export namespace Prisma {
     endDate: Date | string
     daysCount?: number
     createdAt?: Date | string
+    isDraft?: boolean
     days?: TripDayCreateNestedManyWithoutTripInput
   }
 
@@ -7128,6 +7199,7 @@ export namespace Prisma {
     endDate: Date | string
     daysCount?: number
     createdAt?: Date | string
+    isDraft?: boolean
     days?: TripDayUncheckedCreateNestedManyWithoutTripInput
   }
 
@@ -7157,6 +7229,7 @@ export namespace Prisma {
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     daysCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDraft?: BoolFieldUpdateOperationsInput | boolean
     days?: TripDayUpdateManyWithoutTripNestedInput
   }
 
@@ -7170,6 +7243,7 @@ export namespace Prisma {
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     daysCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isDraft?: BoolFieldUpdateOperationsInput | boolean
     days?: TripDayUncheckedUpdateManyWithoutTripNestedInput
   }
 
