@@ -6,6 +6,8 @@ import UserMetadata from "supertokens-node/recipe/usermetadata";
 import { appInfo } from "./appInfo";
 import { TypeInput } from "supertokens-node/types";
 import { isEmailAllowed } from "@/lib/appPermissions";
+import prisma from "@/utils/db";
+import { GenerateUserAvatar } from "@/utils/avatar";
 
 export const backendConfig = (): TypeInput => {
   return {
@@ -51,7 +53,37 @@ export const backendConfig = (): TypeInput => {
               ...originalImplementation,
               signInUpPOST: async function (input) {
                 try {
-                  return await originalImplementation.signInUpPOST!(input);
+                  if (originalImplementation.signInUpPOST === undefined) {
+                    throw Error("Internal Server Error");
+                  }
+                  const response = await originalImplementation.signInUpPOST(
+                    input
+                  );
+
+                  if (
+                    response.status === "OK"
+                  ) {
+                    const id = response.user.id;
+                    const email = response.user.emails[0];
+                    const imageUrl = await GenerateUserAvatar(email);
+                    await prisma.appUser.upsert({
+                      where: {
+                        id
+                      },
+                      create: {
+                        id,
+                        email,
+                        imageUrl,
+                      },
+                      update: {
+                        id,
+                        email,
+                        imageUrl,
+                      }
+                    });
+                  }
+
+                  return response;
                 } catch (err: any) {
                   if (err.message === "Not authorised user") {
                     // this error was thrown from our function override above.
