@@ -1,5 +1,7 @@
 import { env } from "@/config/env";
 import UserMetadata from "supertokens-node/recipe/usermetadata";
+import { createAvatar } from '@dicebear/core';
+import { shapes } from '@dicebear/collection';
 import { z } from "zod";
 import logger from "./logger";
 
@@ -23,7 +25,7 @@ export async function addEmailToAllowlist() {
 
 export async function isEmailAllowed(email: string) {
 
-  logger.info(`ENABLE_EMAIL_ALLOWLIST_UPDATE is set to ${env.ENABLE_EMAIL_ALLOWLIST_UPDATE}` )
+  logger.info(`ENABLE_EMAIL_ALLOWLIST_UPDATE is set to ${env.ENABLE_EMAIL_ALLOWLIST_UPDATE}` );
 
   if (env.ENABLE_EMAIL_ALLOWLIST_UPDATE) {
     await addEmailToAllowlist();
@@ -35,3 +37,4 @@ export async function isEmailAllowed(email: string) {
 
   return allowList.includes(email);
 }
+

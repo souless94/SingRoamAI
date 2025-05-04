@@ -15,7 +15,8 @@ import { useEffect } from "react";
 import { FeatureCard } from "@/components/ui/landing/FeatureCard";
 import { ItineraryCard } from "@/components/ui/landing/ItineraryCard";
 import { StepCard } from "@/components/ui/landing/StepCard";
-import Image from "next/image";
+import { AppFooter } from "@/components/ui/layout/shared/footer";
+import { LandingNavbar } from "@/components/ui/layout/landing/LandingNavbar";
 
 export default function LandingPage() {
   useEffect(() => {
@@ -30,47 +31,7 @@ export default function LandingPage() {
 
   return (
     <div className="flex min-h-screen flex-col overflow-hidden">
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container mx-auto flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2 font-bold text-xl">
-            <Image
-              src="/images/logo.png" // Path to your logo image
-              alt="Logo" // Alt text for accessibility
-              width={50} // Set width of the logo
-              height={50} // Set height of the logo
-            />
-            <Link href="/">singroamAI</Link>
-          </div>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link
-              href="#features"
-              className="text-sm font-medium hover:text-primary"
-            >
-              Features
-            </Link>
-            <Link
-              href="#how-it-works"
-              className="text-sm font-medium hover:text-primary"
-            >
-              How It Works
-            </Link>
-            <Link
-              href="#explore"
-              className="text-sm font-medium hover:text-primary"
-            >
-              Explore
-            </Link>
-          </nav>
-          <div className="flex items-center gap-4">
-            <Button asChild>
-              <Link href="/auth">
-                Get Started
-                <Plane />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </header>
+      <LandingNavbar />
 
       <main className="flex-1">
         {/* Hero Section */}
@@ -125,7 +86,7 @@ export default function LandingPage() {
                   size="lg"
                   className="gap-2 bg-primary hover:bg-primary/90 group transition-all duration-300 transform hover:scale-105"
                 >
-                  <Link href="/auth">
+                  <Link href="/dashboard">
                     Create Your Itinerary <ArrowRight />
                   </Link>
                 </Button>
@@ -340,7 +301,7 @@ export default function LandingPage() {
                   className="border-primary/20 hover:bg-primary/5 group"
                   asChild
                 >
-                  <Link href="/auth">
+                  <Link href="/dashboard">
                     Explore Itineraries
                     <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
@@ -393,7 +354,7 @@ export default function LandingPage() {
                 </p>
                 <div className="relative">
                   <Button size="lg" variant="outline" asChild>
-                    <Link href="/auth">
+                    <Link href="/dashboard">
                       Get Started For Free <ArrowRight />
                     </Link>
                   </Button>
@@ -418,28 +379,11 @@ export default function LandingPage() {
           </div>
         </section>
       </main>
+      <AppFooter />
+      
 
-      <footer className="border-t py-12 bg-muted/30">
-        <div className="container mx-auto">
-          <div className="flex flex-col md:flex-row justify-between gap-8">
-            <div className="mb-8 md:mb-0">
-              <div className="flex items-center gap-2 font-bold text-xl mb-4">
-                <Image
-                  src="/images/logo.png" // Path to your logo image
-                  alt="Logo" // Alt text for accessibility
-                  width={50} // Set width of the logo
-                  height={50} // Set height of the logo
-                />
-                <span>singroamAI</span>
-              </div>
-              <p className="text-muted-foreground max-w-[300px]">
-                AI-powered travel planning to help you create unforgettable
-                experiences.
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
+
+
