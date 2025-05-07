@@ -1,5 +1,6 @@
 import { Trip } from "@/lib/generated/prisma/client";
 import Image from "next/image";
+import Link from "next/link";
 
 interface TripCardProps {
   trip: Trip; // Accept the trip object as a prop
@@ -10,7 +11,7 @@ export function TripCard({ trip }: TripCardProps) {
     <div className="rounded-lg border border-primary/10 bg-background shadow-sm overflow-hidden hover:shadow-md transition-all duration-300 transform hover:scale-105 group">
       <div className="relative">
         <Image
-          src={trip.imageUrl || "/images/placeholder.png"} // Assuming image is part of the trip
+          src={"/images/placeholder.png"} // Assuming image is part of the trip
           alt={trip.title}
           height={500}
           width={500}
@@ -18,7 +19,7 @@ export function TripCard({ trip }: TripCardProps) {
         />
       </div>
       <div className="p-6">
-        <h3 className="text-xl font-semibold mb-2">{trip.title}</h3>
+        <h3 className="text-xl font-semibold mb-2"><Link href={`/trips/edit/${trip.id}`}>{trip.title}</Link></h3>
         <p className="text-muted-foreground mb-4">Location: {trip.location}</p>
         <p className="text-muted-foreground text-sm">
           {trip.daysCount} {trip.daysCount > 1 ? "days" : "day"}

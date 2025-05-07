@@ -23,7 +23,7 @@ export function PreviewTripForm(trip: TripWithInfo) {
       <CardHeader className="pb-4">
         <div className="flex justify-between items-start">
           <div>
-            <CardTitle className="text-2xl">3-Day Tokyo Adventure</CardTitle>
+            <CardTitle className="text-2xl">{trip.title}</CardTitle>
             <CardDescription>
               {new Date(trip.startDate).toLocaleDateString()} -{" "}
               {new Date(trip.endDate).toLocaleDateString()} • Budget of SGD ${" "}

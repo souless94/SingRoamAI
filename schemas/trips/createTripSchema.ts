@@ -12,3 +12,27 @@ export const createTripSchema = z.object({
   activities: z.string().optional(),
 });
 
+export const aiTripOutputSchema = z.object({
+  imagePrompt: z.string(),
+  days: z.array(
+    z.object({
+      title: z.string(),
+      dayIndex: z.number(),
+      date: z.string(),
+      morningTitle: z.string(),
+      morning: z.string(),
+      afternoonTitle: z.string(),
+      afternoon: z.string(),
+      eveningTitle: z.string(),
+      evening: z.string(),
+    })
+  ),
+  weatherInfo: z.object({
+    season: z.string(),
+    temperatureInfo: z.string(),
+    description: z.string(),
+    itemsToPack: z.string().optional(),
+    considerations: z.string().optional(),
+  }),
+});
+

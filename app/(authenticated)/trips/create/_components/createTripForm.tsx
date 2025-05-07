@@ -19,6 +19,8 @@ import { Send } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { createTripSchema } from "@/schemas/trips/createTripSchema";
 import { Trip, TripDay, WeatherInfo } from "@/lib/generated/prisma/client";
+import { createTrip } from "@/actions/tripsActions";
+import { useState } from "react";
 
 type TripWithInfo= Trip & {
     days: TripDay[];
@@ -46,13 +48,10 @@ export function CreateTripForm({onTripCreated}: CreateTripFormProps) {
     },
   });
 
-  const isGenerating = false; // Optional: connect to loading state
-
   const onSubmit = async (data: CreateTripValues) => {
     // You can replace this with a real server action call
-    console.log("Submitting:", data);
-    // const newTrip = await createTripAction(data);
-    // router.push(`/trips/${newTrip.id}`);
+    const response = await createTrip(data);
+    onTripCreated(response.data);
   };
 
   return (
@@ -163,8 +162,8 @@ export function CreateTripForm({onTripCreated}: CreateTripFormProps) {
           )}
         />
 
-        <Button type="submit" size="lg" disabled={isGenerating}>
-          {isGenerating ? (
+        <Button type="submit" size="lg" disabled={form.formState.isSubmitting}>
+          {form.formState.isSubmitting ? (
             <>Generating Itinerary...</>
           ) : (
             <>
