@@ -36,7 +36,7 @@ const DashboardPage = () => {
   );
 
   if (error) return <div>Error fetching trips</div>;
-  if (!data) return <div>Loading initial data...</div>;
+  if (!data) return <div>Loading Page ...</div>;
 
   const totalTrips = data.trips.length; // You can get the total number of trips from the response
   const totalPages = Math.ceil(totalTrips / 10); // Assuming 10 trips per page (can be changed)

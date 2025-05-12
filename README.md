@@ -9,50 +9,41 @@ SingRoamAI is a personalized AI-powered travel itinerary planner designed for Si
 ## Features
 - **AI-Generated Itineraries**: Get smart, structured travel plans based on your specified locations and activities.
 - **Easy Trip Planning & Recording**: Designed for free and easy travelers to document and plan trips effortlessly.
-- **CRUD Operations for Itineraries**: Create, update, and manage your travel itineraries with ease.
-- **Weather & Seasonal Insights**: Displays weather forecasts with winter wear recommendations if applicable.
-- **Estimated Cost Calculation**: Provides estimated expenses based on selected activities and budget.
-- **Cultural & Safety Tips**: Offers useful travel advice without overwhelming users.
+- **CRUD Operations for Itineraries**: Manage your travel itineraries with ease.
+- **Weather & Seasonal Insights**: Displays weather forecasts with recommendations if applicable.
 
-## Supported Destinations (Phase 1)
-- Hong Kong
-- Taiwan
-- Malaysia
-- Japan
-- Korea
 
 ## Tech Stack
 - **Frontend**: Next.js
 - **Deployment**: Vercel
 - **Authentication**: SuperTokens
 - **UI Framework**: shadcn/ui
-- **Data Handling**: Markdown for structured itineraries
 - **Security**:
-  - Permissions control for itinerary editing
-  - Antivirus scanning for past itinerary uploads
-  - XSS Protection & CSP Implementation (Future Enhancements)
+  - ~~Permissions control for itinerary editing~~
+  - ~~Antivirus scanning for past itinerary uploads~~
+  - ~~XSS Protection & CSP Implementation (Future Enhancements)~~
 
-## Project Milestones
+## Features
 ### **Milestone 1: Core Features**
 - [x] Login Page & Authentication (SuperTokens)
 - [x] Dashboard Page
-- [ ] CRUD Operations for Itineraries
-- [ ] Unit Tests for CRUD Operations for Itineraries
+- ~~[ ] CRUD Operations for Itineraries~~
+- ~~[ ] Unit Tests for CRUD Operations for Itineraries~~
 
 ### **Milestone 2**
-- [ ] Implement AI Itinerary Generation (GenAI)
-- [ ] User Permissions (Only Edit Own Itinerary)
-- [ ] AI Output Validation Tests
-- [ ] User Permission Tests
+- [x] Implement AI Itinerary Generation (GenAI)
+- ~~[ ] User Permissions (Only Edit Own Itinerary)~~
+- ~~[ ] AI Output Validation Tests~~
+- ~~[ ] User Permission Tests~~
 
 ### **Milestone 3: Security & File Handling**
-- [ ] File Upload & Antivirus Integration
-- [ ] Security Hardening (XSS, CSP, etc.)
+- ~~[ ] File Upload & Antivirus Integration~~
+- [x] Security Hardening (CSP)
 
 ### **Milestone 4: Release**
-- [ ] CI/CD Implementation
-- [ ] Security Tests
-- [ ] Vercel Deployment
+- [x] CI Implementation
+- [x] Basic Security Tests
+- [x] Vercel Deployment
 
 ## CI/CD & Security
 - **CI/CD Pipeline**: Automating testing and deployment

@@ -18,7 +18,7 @@ export async function createTrip(formData: CreateTripValues) {
   // ✅ Generate AI trip plan
   const aiResult = await generateTripPlan(formData);
 
-  logger.info("Generated Trip:" + JSON.stringify(aiResult, null, 2));
+  logger.info(aiResult);
 
   // Save the weatherInfo to the database
   const weatherInfo = await prisma.weatherInfo.create({

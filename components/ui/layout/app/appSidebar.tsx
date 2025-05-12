@@ -66,7 +66,7 @@ export function AppSidebar() {
     return;
   }
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div>Loading Menu ...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   async function onLogout() {
