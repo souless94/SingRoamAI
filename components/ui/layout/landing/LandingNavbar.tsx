@@ -50,7 +50,7 @@ export function LandingNavbar() {
           </NavigationMenuList>
         </NavigationMenu>
   
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 mr-2">
           <Button asChild>
             <Link href="/dashboard" className="flex items-center gap-2">
               Get Started
