@@ -6,6 +6,11 @@
 
 SingRoamAI is a personalized AI-powered travel itinerary planner designed for Singaporeans. It helps users easily plan free and easy trips while recording past travel experiences. The platform focuses on AI-generated itineraries, seamless itinerary management, and an intuitive user experience.
 
+*Note*: This is a side project, and the demo site may not always be available. Everything on the site is mainly using trial settings.
+
+Demo Site: https://sing-roam-ai.vercel.app
+
+
 ## Features
 - **AI-Generated Itineraries**: Get smart, structured travel plans based on your specified locations and activities.
 - **Easy Trip Planning & Recording**: Designed for free and easy travelers to document and plan trips effortlessly.
@@ -21,7 +26,7 @@ SingRoamAI is a personalized AI-powered travel itinerary planner designed for Si
 - **Security**:
   - ~~Permissions control for itinerary editing~~
   - ~~Antivirus scanning for past itinerary uploads~~
-  - ~~XSS Protection & CSP Implementation (Future Enhancements)~~
+  - Basic CSP Implementation
 
 ## Features
 ### **Milestone 1: Core Features**
