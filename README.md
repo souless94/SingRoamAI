@@ -28,7 +28,7 @@ SingRoamAI is a personalized AI-powered travel itinerary planner designed for Si
 - [x] Login Page & Authentication (SuperTokens)
 - [x] Dashboard Page
 - ~~[ ] CRUD Operations for Itineraries~~
-- ~~[ ] Unit Tests for CRUD Operations for Itineraries~~
+- [x] Basic Unit Tests for Itineraries
 
 ### **Milestone 2**
 - [x] Implement AI Itinerary Generation (GenAI)
