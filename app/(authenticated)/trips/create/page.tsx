@@ -35,7 +35,7 @@ const CreateTripPage = () => {
     setTrip(data); // Update the state when the data is available
   }
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div>Loading Trip...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   const showPreview = !!trip;
