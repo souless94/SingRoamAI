@@ -31,17 +31,19 @@ model Trip {
   startDate DateTime
   endDate   DateTime
   daysCount Int       @default(0)
-  days      TripDay[]
+  days      TripDay[] 
   createdAt DateTime  @default(now())
 
   weatherInfo   WeatherInfo @relation(fields: [weatherInfoid], references: [id])
   weatherInfoid String      @unique
+
+  isDraft Boolean @default(true)
 }
 
 model TripDay {
   id             String   @id @default(cuid())
   title          String
-  trip           Trip     @relation(fields: [tripId], references: [id])
+  trip           Trip     @relation(fields: [tripId], references: [id],  onDelete: Cascade)
   tripId         String
   dayIndex       Int
   date           DateTime

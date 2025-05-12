@@ -1,8 +1,7 @@
-import { Calendar, Home, Inbox, LogOut } from "lucide-react";
+import { Home, LogOut } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -30,11 +29,6 @@ const menuItems = [
     url: "/dashboard",
     icon: Home,
   },
-  {
-    title: "My Trips",
-    url: "/trips",
-    icon: Inbox,
-  }
 ];
 
 // Menu items.
@@ -50,6 +44,18 @@ export function AppSidebar() {
   const session = useSessionContext();
   const router = useRouter();
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
+  // Check session loading or session existence and pass `null` to useSWR if not ready
+  const shouldFetch =
+    !session.loading && session.doesSessionExist && session.userId;
+
+  const {
+    data: appUser,
+    error,
+    isLoading,
+  } = useSWR<appUser>(
+    shouldFetch ? `/api/users/${session.userId}` : null, // Fetch only if session is ready
+    fetcher
+  );
 
   if (session.loading) {
     return <div>Loading...</div>;
@@ -60,11 +66,8 @@ export function AppSidebar() {
     return;
   }
 
-  const {
-    data: appUser,
-    error,
-    isLoading,
-  } = useSWR<appUser>(`/api/users/${session.userId}`, fetcher);
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   async function onLogout() {
     await signOut();
@@ -174,8 +177,6 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-
-
     </Sidebar>
   );
 }
