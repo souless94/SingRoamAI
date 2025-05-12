@@ -53,7 +53,7 @@ const CreateTripPage = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 m-2">
           {/* Input Form */}
           <div className="lg:col-span-1">
             <Card>
@@ -70,7 +70,7 @@ const CreateTripPage = () => {
           </div>
 
           {/* Output Preview */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 m-2">
             {!showPreview ? (
               <div className="h-full flex flex-col items-center justify-center text-center p-12 border rounded-lg bg-background">
                 <Globe className="h-16 w-16 text-muted-foreground mb-6" />
