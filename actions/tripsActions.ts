@@ -2,7 +2,7 @@
 
 import logger from "@/lib/logger";
 import { createTripSchema } from "@/schemas/trips/createTripSchema";
-import prisma from "@/utils/db";
+import { prisma } from "@/utils/db";
 import { generateTripPlan } from "@/utils/genai";
 import { getUnSplashImage } from "@/utils/unsplash";
 import { z } from "zod";

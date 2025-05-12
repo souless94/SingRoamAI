@@ -6,8 +6,9 @@ import UserMetadata from "supertokens-node/recipe/usermetadata";
 import { appInfo } from "./appInfo";
 import { TypeInput } from "supertokens-node/types";
 import { isEmailAllowed } from "@/lib/appPermissions";
-import prisma from "@/utils/db";
+
 import { GenerateUserAvatar } from "@/utils/avatar";
+import { prisma } from "@/utils/db";
 
 export const backendConfig = (): TypeInput => {
   return {

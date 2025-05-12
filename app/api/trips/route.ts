@@ -1,7 +1,6 @@
-import logger from '@/lib/logger';
-import prisma from '@/utils/db';
-import { NextRequest, NextResponse } from 'next/server';
-
+import logger from "@/lib/logger";
+import { prisma } from "@/utils/db";
+import { NextRequest, NextResponse } from "next/server";
 
 // Pagination parameters
 const PAGE_SIZE = 10;
@@ -9,12 +8,12 @@ const PAGE_SIZE = 10;
 export async function GET(request: NextRequest) {
   // Parse query parameters
   const url = new URL(request.url);
-  const page = parseInt(url.searchParams.get('page') || '1', 10);
-  const search = url.searchParams.get('search') || ''; // Get the search term (if provided)
+  const page = parseInt(url.searchParams.get("page") || "1", 10);
+  const search = url.searchParams.get("search") || ""; // Get the search term (if provided)
 
   // Ensure the page number is a positive integer
   if (page < 1) {
-    return NextResponse.json({ error: 'Invalid page number' }, { status: 400 });
+    return NextResponse.json({ error: "Invalid page number" }, { status: 400 });
   }
 
   try {
@@ -22,8 +21,8 @@ export async function GET(request: NextRequest) {
     const totalTrips = await prisma.trip.count({
       where: {
         OR: [
-          { title: { contains: search, mode: 'insensitive' } }, // Search by title (case-insensitive)
-          { location: { contains: search, mode: 'insensitive' } }, // Search by location (case-insensitive)
+          { title: { contains: search, mode: "insensitive" } }, // Search by title (case-insensitive)
+          { location: { contains: search, mode: "insensitive" } }, // Search by location (case-insensitive)
         ],
       },
     });
@@ -35,8 +34,8 @@ export async function GET(request: NextRequest) {
     const trips = await prisma.trip.findMany({
       where: {
         OR: [
-          { title: { contains: search, mode: 'insensitive' } }, // Search by title (case-insensitive)
-          { location: { contains: search, mode: 'insensitive' } }, // Search by location (case-insensitive)
+          { title: { contains: search, mode: "insensitive" } }, // Search by title (case-insensitive)
+          { location: { contains: search, mode: "insensitive" } }, // Search by location (case-insensitive)
         ],
       },
       skip: (page - 1) * PAGE_SIZE, // Skip the previous pages
@@ -46,7 +45,10 @@ export async function GET(request: NextRequest) {
     // Return the paginated trips with the total pages info
     return NextResponse.json({ trips, totalPages });
   } catch (error) {
-    logger.error('Error fetching trips:', error);
-    return NextResponse.json({ error: 'Failed to fetch trips' }, { status: 500 });
+    logger.error("Error fetching trips:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch trips" },
+      { status: 500 }
+    );
   }
 }
