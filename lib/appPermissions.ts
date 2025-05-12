@@ -3,7 +3,6 @@ import UserMetadata from "supertokens-node/recipe/usermetadata";
 import { z } from "zod";
 import logger from "./logger";
 
-
 const emailSchema = z.array(z.string().email());
 
 export async function addEmailToAllowlist() {
@@ -18,21 +17,23 @@ export async function addEmailToAllowlist() {
   await UserMetadata.updateUserMetadata("emailAllowList", {
     emails,
   });
-
 }
 
 export async function isEmailAllowed(email: string) {
+  logger.info(
+    `ENABLE_EMAIL_ALLOWLIST_UPDATE is set to ${env.ENABLE_EMAIL_ALLOWLIST_UPDATE}`
+  );
 
-  logger.info(`ENABLE_EMAIL_ALLOWLIST_UPDATE is set to ${env.ENABLE_EMAIL_ALLOWLIST_UPDATE}` );
-
+  if (env.ENABLE_EMAIL_BYPASS) {
+    return true;
+  }
   if (env.ENABLE_EMAIL_ALLOWLIST_UPDATE) {
     await addEmailToAllowlist();
   }
   const updatedData = await UserMetadata.getUserMetadata("emailAllowList");
   const allowList: string[] = updatedData.metadata.emails || [];
 
-  logger.info(`allowList is ${allowList.toString()}` )
+  logger.info(`allowList is ${allowList.toString()}`);
 
   return allowList.includes(email);
 }
-
