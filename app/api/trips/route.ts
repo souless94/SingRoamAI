@@ -1,11 +1,11 @@
 import prisma from '@/utils/db';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 
 // Pagination parameters
 const PAGE_SIZE = 10;
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   // Parse query parameters
   const url = new URL(request.url);
   const page = parseInt(url.searchParams.get('page') || '1', 10);

@@ -106,12 +106,6 @@ const DashboardPage = () => {
                     Create New Itinerary
                   </Link>
                 </Button>
-                <Button variant="outline" asChild>
-                  <Link href="/trips">
-                    View My Trips
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
               </div>
             </div>
 
@@ -130,7 +124,7 @@ const DashboardPage = () => {
         </div>
         <div className="space-y-8">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-semibold">Your Trips</h2>
+            <h2 className="text-2xl font-semibold">Trips</h2>
           </div>
 
           {/* Trip Cards */}

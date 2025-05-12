@@ -25,6 +25,7 @@ export function buildTripPrompt(input: z.infer<typeof createTripSchema>): string
     startDate,
     endDate,
     tripLength,
+    people,
     budget,
     activities,
   } = input;
@@ -42,17 +43,19 @@ Generate a detailed multi-day travel itinerary and weather information based on 
 - Dates: ${startDate} to ${endDate}
 - Trip Length: ${tripLength} day(s)
 - Budget: $${budget}
+- People Going: ${people}
 - Preferred Activities: ${activities || "Not specified"}
 
+
 ## INSTRUCTIONS
-1. Suggest an image prompt suitable for this destination (e.g., "Santorini sunset with whitewashed houses").
+1. Suggest a short image query suitable for this destination (e.g., "Santorini sunset") to be used for unsplash API.
 2. Generate ${tripLength} day objects with:
    - title (e.g., "Day 1 - Explore Old Town")
    - dayIndex (starting from 1)
    - date (must match the actual trip dates starting from ${startDate})
-   - morningTitle and morning (short title + detailed plan)
-   - afternoonTitle and afternoon (short title + detailed plan)
-   - eveningTitle and evening (short title + detailed plan)
+   - morningTitle and morning (short title + ~300 to 400 words detailed plan with food and activities recommendations )
+   - afternoonTitle and afternoon (short title + ~300 to 400 words detailed plan with food and activities recommendations)
+   - eveningTitle and evening (short title + ~300 to 400 words detailed plan with food and activities recommendations)
 3. Generate a "weatherInfo" object with:
    - season (e.g., Spring, Winter)
    - temperatureInfo (e.g., "Average 12–18°C")

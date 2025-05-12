@@ -21,6 +21,7 @@ import { createTripSchema } from "@/schemas/trips/createTripSchema";
 import { Trip, TripDay, WeatherInfo } from "@/lib/generated/prisma/client";
 import { createTrip } from "@/actions/tripsActions";
 import { useState } from "react";
+import { toast } from "sonner";
 
 type TripWithInfo= Trip & {
     days: TripDay[];
@@ -43,6 +44,7 @@ export function CreateTripForm({onTripCreated}: CreateTripFormProps) {
       startDate: "",
       endDate: "",
       tripLength: 0,
+      people: 1,
       budget: 0,
       activities: "",
     },
@@ -52,6 +54,7 @@ export function CreateTripForm({onTripCreated}: CreateTripFormProps) {
     // You can replace this with a real server action call
     const response = await createTrip(data);
     onTripCreated(response.data);
+    toast.success("Trip Created successfully")
   };
 
   return (
@@ -115,6 +118,20 @@ export function CreateTripForm({onTripCreated}: CreateTripFormProps) {
             )}
           />
         </div>
+
+        <FormField
+          control={form.control}
+          name="people"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>People Going</FormLabel>
+              <FormControl>
+                <Input type="number" min="1" placeholder="e.g. 5" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <FormField
           control={form.control}

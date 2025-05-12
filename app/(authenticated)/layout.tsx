@@ -8,6 +8,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { ReactNode } from "react";
+import { Toaster } from "sonner";
 import { SessionAuth } from "supertokens-auth-react/recipe/session";
 
 export default function AuthenticatedLayout({
@@ -22,6 +23,7 @@ export default function AuthenticatedLayout({
         <SidebarTrigger />
         <SidebarInset>
           <main>{children}</main>
+          <Toaster/>
         </SidebarInset>
       </SidebarProvider>
     </SessionAuth>

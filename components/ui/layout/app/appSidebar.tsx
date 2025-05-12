@@ -29,11 +29,6 @@ const menuItems = [
     title: "Home",
     url: "/dashboard",
     icon: Home,
-  },
-  {
-    title: "My Trips",
-    url: "/trips",
-    icon: Inbox,
   }
 ];
 

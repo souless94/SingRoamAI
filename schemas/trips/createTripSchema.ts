@@ -8,6 +8,7 @@ export const createTripSchema = z.object({
   startDate: z.string().min(1, "Start date is required"),
   endDate: z.string().min(1, "End date is required"),
   tripLength: z.coerce.number().min(1, "Trip length is required"),
+  people: z.coerce.number().gt(0),
   budget: z.coerce.number().gt(0),
   activities: z.string().optional(),
 });

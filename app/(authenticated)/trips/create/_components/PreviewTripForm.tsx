@@ -30,11 +30,6 @@ export function PreviewTripForm(trip: TripWithInfo) {
               {trip.budget}
             </CardDescription>
           </div>
-          <div className="flex gap-2">
-            <Button size="sm" variant="outline">
-              Save
-            </Button>
-          </div>
         </div>
       </CardHeader>
       <CardContent>

@@ -1,8 +1,10 @@
 "use server";
 
+import logger from "@/lib/logger";
 import { createTripSchema } from "@/schemas/trips/createTripSchema";
 import prisma from "@/utils/db";
 import { generateTripPlan } from "@/utils/genai";
+import { getUnSplashImage } from "@/utils/unsplash";
 import { z } from "zod";
 
 type CreateTripValues = z.infer<typeof createTripSchema>;
@@ -16,7 +18,7 @@ export async function createTrip(formData: CreateTripValues) {
   // ✅ Generate AI trip plan
   const aiResult = await generateTripPlan(formData);
 
-  console.log("Generated Trip:", aiResult);
+  logger.info("Generated Trip:" + aiResult);
 
   // Save the weatherInfo to the database
   const weatherInfo = await prisma.weatherInfo.create({
@@ -29,6 +31,10 @@ export async function createTrip(formData: CreateTripValues) {
     },
   });
 
+  const imageUrl = await getUnSplashImage(aiResult.imagePrompt);
+
+  logger.info("Image Url : " + imageUrl);
+
   // Save the trip to the database
   const trip = await prisma.trip.create({
     data: {
@@ -39,7 +45,7 @@ export async function createTrip(formData: CreateTripValues) {
       budget: formData.budget,
       weatherInfoid: weatherInfo.id,
       daysCount: aiResult.days.length,
-      imageUrl: aiResult.imagePrompt, // You can generate an actual image URL if needed
+      imageUrl: imageUrl, // You can generate an actual image URL if needed
       isDraft: true, // Set as true if it's a draft
     },
   });
@@ -75,4 +81,12 @@ export async function createTrip(formData: CreateTripValues) {
     success: true,
     data: fullTrip, // Optionally return the created trip data with ID
   };
+}
+
+export async function deleteTrip(tripId: string) {
+  await prisma.trip.delete({
+    where: { id: tripId },
+  });
+
+  return { success: true };
 }
