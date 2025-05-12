@@ -79,8 +79,11 @@ Demo Site: https://sing-roam-ai.vercel.app
 ## Contributing
 Contributions are welcome! Please check the [issues](https://github.com/yourusername/singroamai/issues) section and follow the contribution guidelines.
 
+## Deployment
+Do update domain for deployment in config/appInfo.ts
+
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the GPL-3.0 License.
 
 ---
 For any inquiries or support, please contact [your email or project link].
