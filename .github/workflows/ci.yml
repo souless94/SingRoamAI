@@ -28,10 +28,3 @@ jobs:
     - name: Run tests
       run: |
         yarn test
-
-    - name: Upload test results to GitHub
-      if: failure()  # Only upload if the tests fail
-      uses: actions/upload-artifact@v2
-      with:
-        name: vitest-test-results
-        path: ./test-results  # Path to test results if applicable (adjust as needed)
