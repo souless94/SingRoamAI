@@ -1,7 +1,7 @@
 "use client";
 import useSWR from "swr";
 import { usePathname, useSearchParams } from "next/navigation";
-import {SearchBar} from "./_components/SearchBar";
+import { SearchBar } from "./_components/SearchBar";
 import { TripCard } from "./_components/TripCard";
 import { Trip } from "@/lib/generated/prisma";
 import {
@@ -100,19 +100,10 @@ const DashboardPage = () => {
           <div className="flex flex-col gap-4">
             <div className="flex flex-wrap gap-4 justify-between items-center">
               <div className="flex gap-2">
-                <Button 
-                 
-                  asChild
-                >
+                <Button asChild>
                   <Link href="/trips/create">
                     <Plus className="h-4 w-4" />
                     Create New Itinerary
-                  </Link>
-                </Button>
-                <Button variant="outline" asChild>
-                  <Link href="/trips">
-                    View My Trips
-                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
               </div>
@@ -133,7 +124,7 @@ const DashboardPage = () => {
         </div>
         <div className="space-y-8">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-semibold">Your Trips</h2>
+            <h2 className="text-2xl font-semibold">Trips</h2>
           </div>
 
           {/* Trip Cards */}
@@ -142,7 +133,7 @@ const DashboardPage = () => {
               <p>No trips found.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-screen-xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 w-full max-w-screen-xl mx-auto">
               {data.trips.map((trip: Trip) => (
                 <TripCard key={trip.id} trip={trip} />
               ))}
@@ -152,12 +143,16 @@ const DashboardPage = () => {
 
         {/* Pagination */}
         {data.trips.length > 0 && (
-          <Pagination>
+          <Pagination className="list-none p-0 m-0">
             <PaginationItem>
               <PaginationPrevious
                 href={`${pathname}?page=${
                   currentPage - 1
                 }&query=${currentQuery}`}
+                aria-disabled={currentPage <= 1}
+                className={
+                  currentPage <= 1 ? "pointer-events-none opacity-50" : ""
+                }
               />
             </PaginationItem>
 
@@ -178,6 +173,12 @@ const DashboardPage = () => {
                 href={`${pathname}?page=${
                   currentPage + 1
                 }&query=${currentQuery}`}
+                aria-disabled={currentPage >= totalPages}
+                className={
+                  currentPage >= totalPages
+                    ? "pointer-events-none opacity-50"
+                    : ""
+                }
               />
             </PaginationItem>
           </Pagination>

@@ -19,6 +19,9 @@ import { Send } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { createTripSchema } from "@/schemas/trips/createTripSchema";
 import { Trip, TripDay, WeatherInfo } from "@/lib/generated/prisma/client";
+import { createTrip } from "@/actions/tripsActions";
+import { useState } from "react";
+import { toast } from "sonner";
 
 type TripWithInfo= Trip & {
     days: TripDay[];
@@ -41,18 +44,17 @@ export function CreateTripForm({onTripCreated}: CreateTripFormProps) {
       startDate: "",
       endDate: "",
       tripLength: 0,
+      people: 1,
       budget: 0,
       activities: "",
     },
   });
 
-  const isGenerating = false; // Optional: connect to loading state
-
   const onSubmit = async (data: CreateTripValues) => {
     // You can replace this with a real server action call
-    console.log("Submitting:", data);
-    // const newTrip = await createTripAction(data);
-    // router.push(`/trips/${newTrip.id}`);
+    const response = await createTrip(data);
+    onTripCreated(response.data);
+    toast.success("Trip Created successfully")
   };
 
   return (
@@ -119,6 +121,20 @@ export function CreateTripForm({onTripCreated}: CreateTripFormProps) {
 
         <FormField
           control={form.control}
+          name="people"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>People Going</FormLabel>
+              <FormControl>
+                <Input type="number" min="1" placeholder="e.g. 5" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
           name="tripLength"
           render={({ field }) => (
             <FormItem>
@@ -163,8 +179,8 @@ export function CreateTripForm({onTripCreated}: CreateTripFormProps) {
           )}
         />
 
-        <Button type="submit" size="lg" disabled={isGenerating}>
-          {isGenerating ? (
+        <Button type="submit" size="lg" disabled={form.formState.isSubmitting}>
+          {form.formState.isSubmitting ? (
             <>Generating Itinerary...</>
           ) : (
             <>
