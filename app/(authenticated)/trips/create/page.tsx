@@ -6,27 +6,24 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Globe,
-} from "lucide-react";
+import { Globe } from "lucide-react";
 import { CreateTripForm } from "./_components/createTripForm";
 import { PreviewTripForm } from "./_components/PreviewTripForm";
 import { useState } from "react";
 import { Trip, TripDay, WeatherInfo } from "@/lib/generated/prisma/client";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
 
-type TripWithInfo= Trip & {
-    days: TripDay[];
-    weatherInfo: WeatherInfo;
-  };
+type TripWithInfo = Trip & {
+  days: TripDay[];
+  weatherInfo: WeatherInfo;
+};
 
 const CreateTripPage = () => {
-
   const [trip, setTrip] = useState<TripWithInfo | null>(null);
 
   const searchParams = useSearchParams();
-  const tripId = searchParams.get('trip');
+  const tripId = searchParams.get("trip");
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
   const { data, error, isLoading } = useSWR<TripWithInfo>(
@@ -34,15 +31,14 @@ const CreateTripPage = () => {
     fetcher
   );
 
-   if (data && !trip) {
+  if (data && !trip) {
     setTrip(data); // Update the state when the data is available
   }
 
-  if (isLoading) return <div>Loading...</div>
-   if (error) return <div>Error: {error.message}</div>
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   const showPreview = !!trip;
-
 
   return (
     <div className="min-h-screen bg-muted/30">
@@ -82,13 +78,12 @@ const CreateTripPage = () => {
                   Your AI Itinerary Will Appear Here
                 </h3>
                 <p className="text-muted-foreground max-w-md">
-                  Fill out your travel preferences and click "Generate
-                  Itinerary" to create your personalized travel plan.
+                  Fill out your travel preferences and click &quot; Generate
+                  Itinerary &quot; to create your personalized travel plan.
                 </p>
               </div>
             ) : (
-              
-             <PreviewTripForm {...trip} />
+              <PreviewTripForm {...trip} />
             )}
           </div>
         </div>

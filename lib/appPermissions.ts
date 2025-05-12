@@ -1,7 +1,5 @@
 import { env } from "@/config/env";
 import UserMetadata from "supertokens-node/recipe/usermetadata";
-import { createAvatar } from '@dicebear/core';
-import { shapes } from '@dicebear/collection';
 import { z } from "zod";
 import logger from "./logger";
 

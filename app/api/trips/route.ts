@@ -1,3 +1,4 @@
+import logger from '@/lib/logger';
 import prisma from '@/utils/db';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -45,7 +46,7 @@ export async function GET(request: NextRequest) {
     // Return the paginated trips with the total pages info
     return NextResponse.json({ trips, totalPages });
   } catch (error) {
-    console.error('Error fetching trips:', error);
+    logger.error('Error fetching trips:', error);
     return NextResponse.json({ error: 'Failed to fetch trips' }, { status: 500 });
   }
 }

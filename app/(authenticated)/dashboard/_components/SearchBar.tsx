@@ -10,12 +10,19 @@ export function SearchBar({ disabled = false }: { disabled?: boolean })  {
   const pathname = usePathname();
 
 
-  // Debounce the search input (300ms delay)
-  const handleSearch = useDebouncedCallback((term: string) => {
-    const params = new URLSearchParams(searchParams);
-    term ? params.set('query', term) : params.delete('query');
-    replace(`${pathname}?${params.toString()}`);
-  }, 500);
+// Debounce the search input (300ms delay)
+const handleSearch = useDebouncedCallback((term: string) => {
+  const params = new URLSearchParams(searchParams);
+  
+  // Use a simple if/else instead of ternary expression
+  if (term) {
+    params.set('query', term);
+  } else {
+    params.delete('query');
+  }
+
+  replace(`${pathname}?${params.toString()}`);
+}, 500);
 
   return (
     <div>
