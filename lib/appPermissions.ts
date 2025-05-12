@@ -25,6 +25,10 @@ export async function isEmailAllowed(email: string) {
 
   logger.info(`ENABLE_EMAIL_ALLOWLIST_UPDATE is set to ${env.ENABLE_EMAIL_ALLOWLIST_UPDATE}` );
 
+  if (env.ENABLE_EMAIL_BYPASS) {
+    return true;
+  }
+
   if (env.ENABLE_EMAIL_ALLOWLIST_UPDATE) {
     await addEmailToAllowlist();
   }
