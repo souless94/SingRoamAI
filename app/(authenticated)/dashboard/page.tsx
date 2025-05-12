@@ -15,7 +15,7 @@ import {
 import { Progress } from "@/components/ui/progress";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 
 const DashboardPage = () => {
   const searchParams = useSearchParams();

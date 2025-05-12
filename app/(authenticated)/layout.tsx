@@ -1,7 +1,6 @@
 "use client";
 
 import { AppSidebar } from "@/components/ui/layout/app/appSidebar";
-import { AppFooter } from "@/components/ui/layout/shared/footer";
 import {
   SidebarInset,
   SidebarProvider,

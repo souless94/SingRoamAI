@@ -13,14 +13,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Send } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { createTripSchema } from "@/schemas/trips/createTripSchema";
 import { Trip, TripDay, WeatherInfo } from "@/lib/generated/prisma/client";
 import { createTrip } from "@/actions/tripsActions";
-import { useState } from "react";
 import { toast } from "sonner";
 
 type TripWithInfo= Trip & {
@@ -35,7 +32,6 @@ type CreateTripFormProps = {
 type CreateTripValues = z.infer<typeof createTripSchema>;
 
 export function CreateTripForm({onTripCreated}: CreateTripFormProps) {
-  const router = useRouter();
   const form = useForm<CreateTripValues>({
     resolver: zodResolver(createTripSchema),
     defaultValues: {

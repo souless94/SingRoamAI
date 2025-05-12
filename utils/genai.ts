@@ -1,4 +1,5 @@
 import { env } from "@/config/env";
+import logger from "@/lib/logger";
 import { aiTripOutputSchema, createTripSchema } from "@/schemas/trips/createTripSchema";
 import { GoogleGenAI } from "@google/genai";
 import { z } from "zod";
@@ -126,7 +127,7 @@ export async function generateTripPlan(input: z.infer<typeof createTripSchema>) 
     const validated = aiTripOutputSchema.parse(parsed);
     return validated;
   } catch (err) {
-    console.error("Failed to parse AI response:", err);
+    logger.error("Failed to parse AI response:", err);
     throw new Error("AI returned invalid JSON format");
   }
 }

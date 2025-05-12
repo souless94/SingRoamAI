@@ -1,14 +1,15 @@
 import { ensureSuperTokensInit } from "@/config/backend";
+import logger from "@/lib/logger";
 import prisma from "@/utils/db";
 import { NextRequest, NextResponse } from "next/server";
 import { withSession } from "supertokens-node/nextjs";
 
 ensureSuperTokensInit();
 
-export async function GET(req: NextRequest, context: { params: { id: string } }) {
+export async function GET(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   return withSession(req, async (err, session) => {
     if (err) {
-      console.log(err);
+      logger.error(err);
       return NextResponse.json(err, { status: 500 });
     }
     if (!session) {
