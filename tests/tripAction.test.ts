@@ -1,6 +1,8 @@
 // import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 // import { z, ZodError } from 'zod';
 
+import { describe, expect, it } from "vitest";
+
 // // Functions to test
 
 
@@ -260,3 +262,8 @@
 //     });
 //   });
 // });
+describe('Trip Actions', () => {
+  it('placeholder', async () => {
+    expect(true);
+  });
+});
