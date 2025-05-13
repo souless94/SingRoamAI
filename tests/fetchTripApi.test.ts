@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 // Mock Prisma
 const mockFindUniqueOrThrow = vi.fn();
 vi.mock('@/utils/db', () => ({
-  default: {
+  prisma: {
     trip: {
       findUniqueOrThrow: mockFindUniqueOrThrow,
     },

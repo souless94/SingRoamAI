@@ -23,7 +23,7 @@ const mockPrisma = {
   },
 };
 vi.mock('@/utils/db', () => ({
-  default: mockPrisma,
+  prisma: mockPrisma,
 }));
 
 // Mock Unsplash

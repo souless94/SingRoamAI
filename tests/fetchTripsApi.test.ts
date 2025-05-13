@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from 'next/server';
 const mockTripFindMany = vi.fn();
 const mockTripCount = vi.fn();
 vi.mock('@/utils/db', () => ({
-  default: {
+  prisma: {
     trip: {
       findMany: mockTripFindMany,
       count: mockTripCount,
