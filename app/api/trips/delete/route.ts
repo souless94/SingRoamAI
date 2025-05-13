@@ -8,7 +8,10 @@ export async function DELETE(req: NextRequest) {
     const { tripId } = await req.json();
 
     if (!tripId || typeof tripId !== "string") {
-      return NextResponse.json({ success: false, error: "Invalid trip ID" }, { status: 400 });
+      return NextResponse.json(
+        { success: false, error: "Invalid trip ID" },
+        { status: 400 }
+      );
     }
 
     await prisma.trip.delete({
@@ -16,8 +19,17 @@ export async function DELETE(req: NextRequest) {
     });
 
     return NextResponse.json({ success: true });
-  } catch (error: any) {
-    logger.error(error);
-    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      logger.error(error);
+      return NextResponse.json(
+        { success: false, error: error.message },
+        { status: 500 }
+      );
+    }
+    return NextResponse.json(
+      { success: false, error: "unknown Error" },
+      { status: 500 }
+    );
   }
 }

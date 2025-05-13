@@ -11,7 +11,10 @@ export async function POST(req: NextRequest) {
     const parsed = createTripSchema.safeParse(formData);
 
     if (!parsed.success) {
-      return NextResponse.json({ success: false, error: "Invalid input" }, { status: 400 });
+      return NextResponse.json(
+        { success: false, error: "Invalid input" },
+        { status: 400 }
+      );
     }
 
     const data = parsed.data;
@@ -68,8 +71,17 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ success: true, data: fullTrip });
-  } catch (error: any) {
-    logger.error(error);
-    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      logger.error(error);
+      return NextResponse.json(
+        { success: false, error: error.message },
+        { status: 500 }
+      );
+    }
+    return NextResponse.json(
+      { success: false, error: "unknown Error" },
+      { status: 500 }
+    );
   }
 }

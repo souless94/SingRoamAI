@@ -63,9 +63,10 @@ export function CreateTripForm({ onTripCreated }: CreateTripFormProps) {
 
       onTripCreated(result.data);
       toast.success("Trip created successfully");
-    } catch (error: any) {
-      console.error("Create trip error:", error);
-      toast.error(error.message || "Something went wrong");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message || "Something went wrong");
+      }
     }
   };
 

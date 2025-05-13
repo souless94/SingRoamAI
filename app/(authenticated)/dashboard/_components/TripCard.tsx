@@ -42,9 +42,11 @@ export function TripCard({ trip }: TripCardProps) {
 
       toast.success("Trip has been deleted");
       router.refresh();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Delete trip error:", error);
-      toast.error(error.message || "Something went wrong");
+      if (error instanceof Error) {
+        toast.error(error.message || "Something went wrong");
+      }
     }
   };
 
