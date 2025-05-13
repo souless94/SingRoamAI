@@ -8,6 +8,7 @@ SingRoamAI is a personalized AI-powered travel itinerary planner designed for Si
 
 *Note*: This is a side project, and the demo site may not always be available. Everything on the site is mainly using trial settings.
 
+
 Demo Site: https://sing-roam-ai.vercel.app
 
 
@@ -27,6 +28,8 @@ Demo Site: https://sing-roam-ai.vercel.app
   - ~~Permissions control for itinerary editing~~
   - ~~Antivirus scanning for past itinerary uploads~~
   - Basic CSP Implementation
+
+*Minor Note*: There is a bug from prisma causing next js server actions to fail in vercel. Switched to API Call as there is some issue.
 
 ## Features
 ### **Milestone 1: Core Features**

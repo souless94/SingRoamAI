@@ -17,13 +17,12 @@ import { Button } from "@/components/ui/button";
 import { Send } from "lucide-react";
 import { createTripSchema } from "@/schemas/trips/createTripSchema";
 import { Trip, TripDay, WeatherInfo } from "@/lib/generated/prisma/client";
-import { createTrip } from "@/actions/tripsActions";
 import { toast } from "sonner";
 
-type TripWithInfo= Trip & {
-    days: TripDay[];
-    weatherInfo: WeatherInfo;
-  };
+type TripWithInfo = Trip & {
+  days: TripDay[];
+  weatherInfo: WeatherInfo;
+};
 
 type CreateTripFormProps = {
   onTripCreated: (trip: TripWithInfo) => void;
@@ -31,7 +30,7 @@ type CreateTripFormProps = {
 
 type CreateTripValues = z.infer<typeof createTripSchema>;
 
-export function CreateTripForm({onTripCreated}: CreateTripFormProps) {
+export function CreateTripForm({ onTripCreated }: CreateTripFormProps) {
   const form = useForm<CreateTripValues>({
     resolver: zodResolver(createTripSchema),
     defaultValues: {
@@ -47,30 +46,49 @@ export function CreateTripForm({onTripCreated}: CreateTripFormProps) {
   });
 
   const onSubmit = async (data: CreateTripValues) => {
-    // You can replace this with a real server action call
-    const response = await createTrip(data);
-    onTripCreated(response.data);
-    toast.success("Trip Created successfully")
+    try {
+      const res = await fetch("/api/trips/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok || !result.success) {
+        throw new Error(result.error || "Failed to create trip");
+      }
+
+      onTripCreated(result.data);
+      toast.success("Trip created successfully");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message || "Something went wrong");
+      }
+    }
   };
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-
-      <FormField
+        <FormField
           control={form.control}
           name="title"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Brief Description of Trip</FormLabel>
               <FormControl>
-                <Input placeholder="e.g. Going to Japan for cherry blossom viewing" {...field} />
+                <Input
+                  placeholder="e.g. Going to Japan for cherry blossom viewing"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-
 
         <FormField
           control={form.control}
@@ -168,7 +186,12 @@ export function CreateTripForm({onTripCreated}: CreateTripFormProps) {
             <FormItem>
               <FormLabel>Budget (SGD) </FormLabel>
               <FormControl>
-              <Input type="number" min="0" placeholder="e.g. 5000" {...field} />
+                <Input
+                  type="number"
+                  min="0"
+                  placeholder="e.g. 5000"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

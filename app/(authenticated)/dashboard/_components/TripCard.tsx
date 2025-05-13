@@ -1,4 +1,3 @@
-import { deleteTrip } from "@/actions/tripsActions";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -20,15 +19,35 @@ interface TripCardProps {
 }
 
 export function TripCard({ trip }: TripCardProps) {
-
   const router = useRouter();
 
   const onDelete = async (tripId: string) => {
     const confirmed = confirm("Are you sure you want to delete this trip?");
     if (!confirmed) return;
-    await deleteTrip(tripId);
-    toast.success("Trip has been deleted");
-    router.refresh();
+
+    try {
+      const res = await fetch("/api/trips/delete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ tripId }),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok || !result.success) {
+        throw new Error(result.error || "Failed to delete trip");
+      }
+
+      toast.success("Trip has been deleted");
+      router.refresh();
+    } catch (error: unknown) {
+      console.error("Delete trip error:", error);
+      if (error instanceof Error) {
+        toast.error(error.message || "Something went wrong");
+      }
+    }
   };
 
   return (
