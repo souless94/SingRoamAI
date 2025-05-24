@@ -86,3 +86,21 @@
   }
 }
 
+
+@media print {
+  .print-page-break {
+    page-break-after: always;
+    margin-top: 10mm; 
+  }
+
+  /* Optional: Avoid breaking inside cards or elements */
+  .avoid-break {
+    break-inside: avoid;
+  }
+
+  /* Optional: Hide export button */
+  .no-print {
+    display: none !important;
+  }
+}
+

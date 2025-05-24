@@ -9,10 +9,12 @@ import {
 import { Globe } from "lucide-react";
 import { CreateTripForm } from "./_components/createTripForm";
 import { PreviewTripForm } from "./_components/PreviewTripForm";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Trip, TripDay, WeatherInfo } from "@/lib/generated/prisma/client";
 import { useSearchParams } from "next/navigation";
+import { useReactToPrint } from "react-to-print";
 import useSWR from "swr";
+import { Button } from "@/components/ui/button";
 
 type TripWithInfo = Trip & {
   days: TripDay[];
@@ -20,6 +22,12 @@ type TripWithInfo = Trip & {
 };
 
 const CreateTripPage = () => {
+  const componentRef = useRef<HTMLDivElement>(null);
+
+  const handlePrint = useReactToPrint({
+    contentRef: componentRef,
+  });
+
   const [trip, setTrip] = useState<TripWithInfo | null>(null);
 
   const searchParams = useSearchParams();
@@ -83,7 +91,14 @@ const CreateTripPage = () => {
                 </p>
               </div>
             ) : (
-              <PreviewTripForm {...trip} />
+              <div>
+                <div className="flex justify-end mb-2">
+                  <Button variant="outline" onClick={handlePrint} className="no-print">Export to PDF</Button>
+                </div>
+                <div ref={componentRef}>
+                  <PreviewTripForm {...trip} />
+                </div>
+              </div>
             )}
           </div>
         </div>

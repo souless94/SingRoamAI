@@ -9,6 +9,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Trip, TripDay, WeatherInfo } from "@/lib/generated/prisma/client";
 import { Separator } from "@radix-ui/react-separator";
+import { forwardRef } from 'react';
 
 type TripWithInfo= Trip & {
     days: TripDay[];
@@ -16,9 +17,9 @@ type TripWithInfo= Trip & {
   };
 
 
-export function PreviewTripForm(trip: TripWithInfo) {
+export function PreviewTripFormInner(trip: TripWithInfo, ref: React.Ref<HTMLDivElement>) {
   return (
-    <Card>
+    <Card ref={ref} >
       <CardHeader className="pb-4">
         <div className="flex justify-between items-start">
           <div>
@@ -42,7 +43,7 @@ export function PreviewTripForm(trip: TripWithInfo) {
           <TabsContent value="itinerary" className="space-y-6">
             <div className="space-y-6">
               {trip.days.map((day) => (
-                <div key={day.dayIndex}>
+                <div key={day.dayIndex} className="print-page-break">
                   <div>
                     <h3 className="text-xl font-semibold mb-4">{day.title}</h3>
 
@@ -143,3 +144,5 @@ export function PreviewTripForm(trip: TripWithInfo) {
     </Card>
   );
 }
+
+export const PreviewTripForm = forwardRef(PreviewTripFormInner);
