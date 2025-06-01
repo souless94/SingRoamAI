@@ -42,7 +42,10 @@ export function PreviewTripFormInner(trip: TripWithInfo, ref: React.Ref<HTMLDivE
           {/* Itinerary Tab */}
           <TabsContent value="itinerary" className="space-y-6">
             <div className="space-y-6">
-              {trip.days.map((day) => (
+              {trip.days
+              .slice()
+              .sort((a, b) => a.dayIndex - b.dayIndex)
+              .map((day) => (
                 <div key={day.dayIndex} className="print-page-break">
                   <div>
                     <h3 className="text-xl font-semibold mb-4">{day.title}</h3>
