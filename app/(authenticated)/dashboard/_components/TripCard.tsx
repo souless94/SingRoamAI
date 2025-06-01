@@ -76,8 +76,8 @@ export function TripCard({ trip }: TripCardProps) {
       <CardFooter>
         <div className="text-muted-foreground">
           <p className="text-sm">
-            {new Date(trip.startDate).toLocaleDateString()} to{" "}
-            {new Date(trip.endDate).toLocaleDateString()}
+            {new Date(trip.startDate).toLocaleDateString("en-GB")} to{" "}
+            {new Date(trip.endDate).toLocaleDateString("en-GB")}
           </p>
         </div>
       </CardFooter>
