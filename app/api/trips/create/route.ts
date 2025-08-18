@@ -19,6 +19,7 @@ export async function POST(req: NextRequest) {
 
     const data = parsed.data;
 
+    logger.info(data);
     // Generate AI trip plan
     const aiResult = await generateTripPlan(data);
     logger.info(aiResult);

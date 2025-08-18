@@ -18,6 +18,7 @@ import { Send } from "lucide-react";
 import { createTripSchema } from "@/schemas/trips/createTripSchema";
 import { Trip, TripDay, WeatherInfo } from "@/lib/generated/prisma/client";
 import { toast } from "sonner";
+import { adjustEndDate, calculateTripLength } from "@/utils/tripHelper";
 
 type TripWithInfo = Trip & {
   days: TripDay[];
@@ -38,10 +39,10 @@ export function CreateTripForm({ onTripCreated }: CreateTripFormProps) {
       destination: "",
       startDate: "",
       endDate: "",
-      tripLength: 0,
-      people: 1,
-      budget: 0,
-      activities: "",
+      tripLength: "0",
+      people: "1",
+      budget: "0",
+      notes: "",
     },
   });
 
@@ -112,7 +113,23 @@ export function CreateTripForm({ onTripCreated }: CreateTripFormProps) {
               <FormItem>
                 <FormLabel>Start Date</FormLabel>
                 <FormControl>
-                  <Input type="date" {...field} />
+                  <Input
+                    type="date"
+                    {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      const newStart = e.target.value;
+                      const newEnd = adjustEndDate(
+                        newStart,
+                        form.getValues("endDate")
+                      );
+                      form.setValue("endDate", newEnd);
+                      form.setValue(
+                        "tripLength",
+                        String(calculateTripLength(newStart, newEnd))
+                      );
+                    }}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -125,7 +142,19 @@ export function CreateTripForm({ onTripCreated }: CreateTripFormProps) {
               <FormItem>
                 <FormLabel>End Date</FormLabel>
                 <FormControl>
-                  <Input type="date" {...field} />
+                  <Input
+                    type="date"
+                    {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      const newEnd = e.target.value;
+                      const start = form.getValues("startDate");
+                      form.setValue(
+                        "tripLength",
+                        String(calculateTripLength(start, newEnd))
+                      );
+                    }}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -154,7 +183,7 @@ export function CreateTripForm({ onTripCreated }: CreateTripFormProps) {
             <FormItem>
               <FormLabel>Trip Length (Days)</FormLabel>
               <FormControl>
-                <Input type="number" min="1" placeholder="e.g. 5" {...field} />
+                <Input type="number" {...field} readOnly />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -163,7 +192,7 @@ export function CreateTripForm({ onTripCreated }: CreateTripFormProps) {
 
         <FormField
           control={form.control}
-          name="activities"
+          name="notes"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Specific activities</FormLabel>

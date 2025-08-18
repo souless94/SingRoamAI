@@ -28,7 +28,7 @@ export function buildTripPrompt(input: z.infer<typeof createTripSchema>): string
     tripLength,
     people,
     budget,
-    activities,
+    notes,
   } = input;
 
   return `
@@ -45,7 +45,7 @@ Generate a detailed multi-day travel itinerary and weather information based on 
 - Trip Length: ${tripLength} day(s)
 - Budget: $${budget}
 - People Going: ${people}
-- Preferred Activities: ${activities || "Not specified"}
+- Notes: ${notes || "NA"}
 
 
 ## INSTRUCTIONS
