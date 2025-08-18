@@ -127,7 +127,7 @@ export async function generateTripPlan(input: z.infer<typeof createTripSchema>) 
     const validated = aiTripOutputSchema.parse(parsed);
     return validated;
   } catch (err) {
-    logger.error("Failed to parse AI response:", err);
+    logger.error(err,"Failed to parse AI response:");
     throw new Error("AI returned invalid JSON format");
   }
 }

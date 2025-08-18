@@ -11,7 +11,7 @@ export async function addEmailToAllowlist() {
   );
   const parsedEmails = emailSchema.safeParse(emails);
   if (!parsedEmails.success) {
-    logger.error("Invalid emails:", parsedEmails.error.format());
+    logger.error(parsedEmails.error,"Invalid emails");
     throw new Error("System Error Invalid emails");
   }
   await UserMetadata.updateUserMetadata("emailAllowList", {

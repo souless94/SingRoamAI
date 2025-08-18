@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
     // Return the paginated trips with the total pages info
     return NextResponse.json({ trips, totalPages });
   } catch (error) {
-    logger.error("Error fetching trips:", error);
+    logger.error(error,"Error at fetching Trips");
     return NextResponse.json(
       { error: "Failed to fetch trips" },
       { status: 500 }

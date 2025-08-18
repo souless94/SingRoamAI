@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
         location: data.destination,
         startDate: new Date(data.startDate),
         endDate: new Date(data.endDate),
-        budget: data.budget,
+        budget: Number(data.budget),
         weatherInfoid: weatherInfo.id,
         daysCount: aiResult.days.length,
         imageUrl,
