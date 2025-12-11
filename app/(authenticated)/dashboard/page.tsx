@@ -3,7 +3,7 @@ import useSWR from "swr";
 import { usePathname, useSearchParams } from "next/navigation";
 import { SearchBar } from "./_components/SearchBar";
 import { TripCard } from "./_components/TripCard";
-import { Trip } from "@/lib/generated/prisma";
+import { Trip } from "@/lib/generated/prisma/client";
 import {
   Pagination,
   PaginationItem,

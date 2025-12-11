@@ -20,7 +20,7 @@ import {
 } from "supertokens-auth-react/recipe/session";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
-import { appUser } from "@/lib/generated/prisma";
+import { appUser } from "@/lib/generated/prisma/client";
 
 // Menu items.
 const menuItems = [
