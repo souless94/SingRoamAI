@@ -7,7 +7,7 @@ import { contentSecurityPolicyHeaderValue, nonce } from "./utils/cspConfig";
 
 ensureSuperTokensInit();
 
-export async function middleware(
+export async function proxy(
   request: NextRequest & { session?: SessionContainer }
 ) {
   const securityHeaders = {
