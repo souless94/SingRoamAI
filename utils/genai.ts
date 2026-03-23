@@ -8,17 +8,6 @@ const genai = new GoogleGenAI({ apiKey: env.GEMINI_API_KEY });
 
 
 
-const systemInstruction = `
-You are a structured travel planning assistant. Your job is to generate a complete, realistic, and practical travel itinerary based on the user's preferences. Please generate the following details:
-
-- Detailed summary for each day of the trip (morning, afternoon, evening).
-- Include location names, activities, and key experiences for each part of the day.
-- **Do not include any citations, source references, or numbers in brackets (like [4], [7]).**
-- Your response should be in a structured JSON format without any reference to sources or citations.
-- Ensure the activities are practical, clear, and easy to follow.
-- The packing list and weather advice should be included as part of the day-by-day breakdown, without citations.
-- Provide an overall, easy-to-read travel plan that is complete and realistic, with no unnecessary information or references.
-`;
 export function buildTripPrompt(input: z.infer<typeof createTripSchema>): string {
   const {
     title,
@@ -65,7 +54,7 @@ Generate a detailed multi-day travel itinerary and weather information based on 
    - considerations (e.g., "Some attractions may close early in winter")
 
 ## RESPONSE FORMAT
-Respond only with a valid JSON object like below:
+You MUST respond with ONLY a raw JSON object. No markdown, no code fences, no explanation — just the JSON.
 
 {
   "imagePrompt": "string",
@@ -94,40 +83,60 @@ Respond only with a valid JSON object like below:
 }
 
 
-async function generateAIText(prompt: string = "", context: string = "") {
+// Step 1: Use Google Search grounding to gather real, up-to-date travel info
+async function researchWithGrounding(prompt: string): Promise<string> {
   const response = await genai.models.generateContent({
-    model: "gemini-2.0-flash",
-    contents: [
-      {
-        role: "user",
-        parts: [{ text: prompt }],
-      },
-    ],
+    model: "gemini-2.5-flash",
+    contents: [{ role: "user", parts: [{ text: prompt }] }],
     config: {
-      systemInstruction: context,
+      systemInstruction: "You are a travel research assistant. Use Google Search to find accurate, up-to-date information about the destination including current attractions, weather, local tips, and pricing. Summarize your findings clearly.",
       tools: [{ googleSearch: {} }],
     },
   });
 
-  return response;
+  if (!response.text) throw new Error("No research response from AI");
+  return response.text;
+}
+
+// Step 2: Format the researched content into structured JSON
+async function formatAsJson(researchedContent: string, structurePrompt: string): Promise<string> {
+  const response = await genai.models.generateContent({
+    model: "gemini-2.5-flash",
+    contents: [
+      {
+        role: "user",
+        parts: [{
+          text: `Using the following researched travel information, generate the structured itinerary.\n\n## RESEARCHED INFO\n${researchedContent}\n\n${structurePrompt}`,
+        }],
+      },
+    ],
+    config: {
+      systemInstruction: "You are a structured travel planning assistant. Generate complete, realistic, and practical travel itineraries. CRITICAL: You MUST respond with a single, valid JSON object only. No markdown, no code fences, no prose, no citations.",
+      responseMimeType: "application/json",
+    },
+  });
+
+  if (!response.text) throw new Error("No format response from AI");
+  return response.text;
 }
 
 
 export async function generateTripPlan(input: z.infer<typeof createTripSchema>) {
   const prompt = buildTripPrompt(input);
-  const response = await generateAIText(prompt, systemInstruction);
 
-  const text = response.text;
+  // Step 1: Research with Google Search grounding
+  const researchedContent = await researchWithGrounding(prompt);
 
-  if (!text) throw new Error("No response from AI");
+  // Step 2: Format into valid JSON
+  const text = await formatAsJson(researchedContent, prompt);
 
   try {
-    const jsonString = text.trim().replace(/^```json\n?/, "").replace(/```$/, "");
+    const jsonString = text.trim().replace(/^```(?:json)?\n?/, "").replace(/\n?```$/, "");
     const parsed = JSON.parse(jsonString);
     const validated = aiTripOutputSchema.parse(parsed);
     return validated;
   } catch (err) {
-    logger.error(err,"Failed to parse AI response:");
+    logger.error(err, "Failed to parse AI response:");
     throw new Error("AI returned invalid JSON format");
   }
 }

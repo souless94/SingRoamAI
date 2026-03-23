@@ -56,7 +56,7 @@ export function TripCard({ trip }: TripCardProps) {
         <CardTitle>{trip.title}</CardTitle>
         <CardDescription>
           <Image
-            src={trip.imageUrl ?? "/images/placeholder.png"} // Assuming image is part of the trip
+            src={trip.imageUrl || "/images/placeholder.png"}
             alt={trip.title}
             height={500}
             width={500}
